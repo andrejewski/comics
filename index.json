@@ -319,6 +319,14 @@
     {
       "filename": "wall.png",
       "createdAt": "2019-09-08T08:13:18.000Z"
+    },
+    {
+      "filename": "choke.png",
+      "createdAt": "2019-09-15T18:04:01.000Z"
+    },
+    {
+      "filename": "allergy.png",
+      "createdAt": "2019-09-15T18:09:12.000Z"
     }
   ]
 }
