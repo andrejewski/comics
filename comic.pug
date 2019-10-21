@@ -7,26 +7,37 @@ html
       meta(name='viewport', content='width=device-width,initial-scale=1')
       meta(http-equiv='Content-type', content='text/html;charset=UTF-8')
 
-      title Comics
+      title= page.comic.name
 
       meta(name='author', content="Chris Andrejewski")
+      meta(name="description", content=`A web comic published ${moment(page.comic.createdAt).format('MMMM Do, YYYY')} by Chris Andrejewski`)
 
-      | <meta name="description" content="The web comics">
       | <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.ico">
       | <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.ico">
       | <link rel="icon" type="image/png" sizes="64x64" href="/favicon-64.ico">
       | <meta name="msapplication-TileColor" content="#ffffff">
       | <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
       | <meta name="theme-color" content="#ffffff">
-      | <link rel="stylesheet" href="_assets/stylesheet.css">
-  body.comic-index
-    nav
-      h1 Comics
-      ul.index
-        for comic in comics
-          li
-            a(href='./'+comic.name)= comic.name
-            | &nbsp;
-            time(time=comic.createdAt, title=moment(comic.createdAt).format('LLLL'))= moment(comic.createdAt).format('MMM YYYY')
+      | <link rel="stylesheet" href="../_assets/stylesheet.css">
+  body
+    main.comic
+      img(src='../_images/'+page.comic.filename)
+
+      .about
+        time(datetime=page.comic.createdAt, title=moment(page.comic.createdAt).format('LLLL'))
+          | Published #{moment(page.comic.createdAt).format('dddd, MMMM Do, YYYY')}
+
+    footer.links
+      .links-paging
+        if page.previous
+          a.link.link--previous(href=`../${page.previous.name}`) Previous
+        else
+          .no-link
+        if page.next
+          a.link.link--next(href=`../${page.next.name}`) Next
+        else
+          .no-link
+      
+      a.link.link--list(href='../') List all comics
     
     | <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-43674193-3', 'auto');ga('send', 'pageview');</script>
