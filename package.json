@@ -1,22 +1,22 @@
 {
   "name": "comics",
   "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "build": "node generate"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/andrejewski/comics.git"
-  },
-  "keywords": [],
   "author": "Chris Andrejewski <christopher.andrejewski@gmail.com> (http://chrisandrejewski.com)",
   "bugs": {
     "url": "https://github.com/andrejewski/comics/issues"
   },
-  "homepage": "https://github.com/andrejewski/comics#readme",
   "devDependencies": {
     "moment": "^2.22.2",
     "pug": "^2.0.3"
+  },
+  "homepage": "https://github.com/andrejewski/comics#readme",
+  "keywords": [],
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrejewski/comics.git"
+  },
+  "scripts": {
+    "build": "node generate"
   }
 }
