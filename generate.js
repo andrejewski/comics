@@ -2,7 +2,11 @@ const fs = require('fs')
 const path = require('path')
 const { promisify } = require('util')
 const pug = require('pug')
-const moment = require('moment')
+const moment = require('moment-timezone')
+
+// Freezing the timezone so results aren't different as
+// the OS switches time zones.
+moment.tz.setDefault('America/Los_Angeles')
 
 const publicDir = path.join(__dirname, 'docs')
 const comicsDir = path.join(publicDir, '_images')
