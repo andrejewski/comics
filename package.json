@@ -8,7 +8,8 @@
   "devDependencies": {
     "moment": "^2.22.2",
     "moment-timezone": "^0.5.28",
-    "pug": "^2.0.3"
+    "pug": "^2.0.3",
+    "image-size": "^0.9.3"
   },
   "homepage": "https://github.com/andrejewski/comics#readme",
   "keywords": [],

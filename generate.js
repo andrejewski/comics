@@ -3,6 +3,7 @@ const path = require('path')
 const { promisify } = require('util')
 const pug = require('pug')
 const moment = require('moment-timezone')
+const imageSizeOf = require('image-size')
 
 // Freezing the timezone so results aren't different as
 // the OS switches time zones.
@@ -35,11 +36,36 @@ const ensureDir = async path => {
   }
 }
 
+async function getImageSize (filePath) {
+  return new Promise((resolve, reject) => {
+    imageSizeOf(filePath, (error, dimensions) => {
+      if (error)  {
+        return reject(error)
+       }
+       
+       const { width, height } = dimensions
+       resolve({ width, height })
+    })
+  })
+}
+
 const basePath = '/comics'
 
 const baseName = filename => path.basename(filename, path.extname(filename))
 
 const oldestFirst = (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
+
+async function addImageSizeInfo (comics) {
+  return Promise.all(comics.map(async comic => {
+    if (comic.width && comic.height) {
+      return comic
+    }
+
+    const comicImageFilePath = path.join(comicsDir, comic.filename)
+    const { width, height } = await getImageSize(comicImageFilePath)
+    return Object.assign({}, comic, { width, height })
+  }))
+}
 
 async function main () {
   const allFilenames = await readDir(comicsDir)
@@ -62,7 +88,8 @@ async function main () {
     return { filename, createdAt }
   })
 
-  const comicList = existingComics.concat(newComics).sort(oldestFirst)
+  const allComics = existingComics.concat(newComics).sort(oldestFirst)
+  const comicList = await addImageSizeInfo(allComics)
 
   await writeFile(
     comicsIndex,

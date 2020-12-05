@@ -21,7 +21,7 @@ html(lang="en")
       | <link rel="stylesheet" href="../_assets/stylesheet.css">
   body
     main.comic
-      img(src='../_images/'+page.comic.filename)
+      img(src='../_images/'+page.comic.filename, width=page.comic.width, height=page.comic.height)
 
       .about
         time(datetime=page.comic.createdAt, title=moment(page.comic.createdAt).format('LLLL'))
