@@ -6,10 +6,12 @@
     "url": "https://github.com/andrejewski/comics/issues"
   },
   "devDependencies": {
+    "image-size": "^0.9.3",
+    "imagemin": "^7.0.1",
+    "imagemin-pngquant": "^9.0.1",
     "moment": "^2.22.2",
     "moment-timezone": "^0.5.28",
-    "pug": "^2.0.3",
-    "image-size": "^0.9.3"
+    "pug": "^2.0.3"
   },
   "homepage": "https://github.com/andrejewski/comics#readme",
   "keywords": [],

@@ -4,17 +4,20 @@ const { promisify } = require('util')
 const pug = require('pug')
 const moment = require('moment-timezone')
 const imageSizeOf = require('image-size')
+const imagemin = require('imagemin');
+const imageminPngquant = require('imagemin-pngquant');
 
 // Freezing the timezone so results aren't different as
 // the OS switches time zones.
 moment.tz.setDefault('America/Los_Angeles')
 
 const publicDir = path.join(__dirname, 'docs')
-const comicsDir = path.join(publicDir, '_images')
+const comicsDir = path.join(__dirname, 'images')
 const comicsIndex = path.join(__dirname, 'index.json')
 const comicsTemplate = path.join(__dirname, 'index.pug')
 const comicTemplate = path.join(__dirname, 'comic.pug')
 const comicsPage = path.join(publicDir, 'index.html')
+const comicImagesDir = path.join(publicDir, '_images')
 
 const makeDir = promisify(fs.mkdir)
 const readDir = promisify(fs.readdir)
@@ -67,6 +70,19 @@ async function addImageSizeInfo (comics) {
   }))
 }
 
+async function compressComicImages (comics) {
+  const existingConvertedFileNames = await readDir(comicImagesDir)
+  const unconvertedComics = comics.filter(comic => !existingConvertedFileNames.includes(comic.filename))
+  const comicFilePaths = unconvertedComics.map(comic => path.join(comicsDir, comic.filename))
+
+  await imagemin(comicFilePaths, {
+    destination: comicImagesDir,
+    plugins: [
+        imageminPngquant()
+    ]
+  })
+}
+
 async function main () {
   const allFilenames = await readDir(comicsDir)
   const comicFilenames = allFilenames.filter(name => !name.startsWith('.'))
@@ -96,6 +112,8 @@ async function main () {
     JSON.stringify({ comics: comicList }, null, 2),
     fileOptions
   )
+
+  await compressComicImages(comicList)
 
   const comics = comicList.map(comic => {
     const name = baseName(comic.filename)
