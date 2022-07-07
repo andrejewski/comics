@@ -9,7 +9,7 @@
     "image-size": "^0.9.3",
     "imagemin": "^7.0.1",
     "imagemin-pngquant": "^9.0.1",
-    "moment": "^2.22.2",
+    "moment": "^2.29.4",
     "moment-timezone": "^0.5.28",
     "pug": "^2.0.3"
   },
