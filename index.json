@@ -1469,6 +1469,18 @@
       "createdAt": "2025-03-03T02:19:13.019Z",
       "width": 2040,
       "height": 4240
+    },
+    {
+      "filename": "plastic.png",
+      "createdAt": "2025-03-20T03:59:53.619Z",
+      "width": 2050,
+      "height": 6270
+    },
+    {
+      "filename": "knotty.png",
+      "createdAt": "2025-03-20T05:35:55.081Z",
+      "width": 2050,
+      "height": 4258
     }
   ]
 }
