@@ -1649,6 +1649,12 @@
       "createdAt": "2026-10-12T20:01:50.691Z",
       "width": 2100,
       "height": 10400
+    },
+    {
+      "filename": "elevated.png",
+      "createdAt": "2026-11-02T07:01:11.790Z",
+      "width": 2050,
+      "height": 12345
     }
   ]
 }
